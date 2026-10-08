@@ -75,7 +75,7 @@ Message: `My order 1001 is late and I don't know when it will arrive`
 
 Tools called: `get_order`, then `check_shipping`. No ticket, because the ETA solved the problem.
 
-![Demo 1](screenshots/demo1_late_order.png)
+![Demo 1 and 2](screenshots/demo1_2.jpeg)
 
 ### Case 2: cancel and refund
 
@@ -83,7 +83,7 @@ Message: `I want to cancel order 1002 and get my money back`
 
 Tools called: `get_order`, `cancel_order`, then `refund_order`. The order ends as `cancelled` and `refunded`.
 
-![Demo 2](screenshots/demo2_cancel_refund.png)
+Shown in the second cell of the screenshot above.
 
 ### Case 3: cancel a shipped order
 
@@ -91,7 +91,7 @@ Message: `Cancel my order 1001 right now`
 
 Tools called: `get_order`, `check_shipping`, then `create_ticket`. The agent sees the order is shipped, does not cancel it, and opens a ticket for a human.
 
-![Demo 3](screenshots/demo3_cancel_shipped.png)
+![Demo 3](screenshots/demo3.jpeg)
 
 ### Case 4: angry customer
 
@@ -99,13 +99,17 @@ Message: `This is the third time my order 1003 has problems, the stand arrived b
 
 Tools called: `get_order`, then `create_ticket` with high priority. The agent does not refund, because the order total is above the refund limit.
 
-![Demo 4](screenshots/demo4_angry_customer.png)
+![Demo 4](screenshots/demo4.jpeg)
 
 ### Chat interface
 
-![Chat UI](screenshots/ui_chat.png)
+![Chat UI](screenshots/ui.jpeg)
 
 ## Limitations
+
+- The agent has no memory between messages yet.
+- A retry restarts the whole run, so a tool with side effects such as `create_ticket` could run twice. A production system would make these tools idempotent.
+- All data is dummy data held in Python variables and resets when the runtime restarts.
 
 - The agent has no memory between messages yet.
 - A retry restarts the whole run, so a tool with side effects such as `create_ticket` could run twice. A production system would make these tools idempotent.
